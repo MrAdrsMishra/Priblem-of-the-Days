@@ -34,3 +34,34 @@ public:
     return sign * quotient;
 }
 };
+// another method
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(divisor==0){
+            return INT_MAX;
+        }
+        if(divisor ==1){
+            return dividend;
+        }
+        if(dividend == INT_MIN && divisor == -1){
+            return INT_MAX;
+        }
+    int quotient = 0;
+    int sign = ((dividend < 0)^(divisor < 0)) ? -1:1;
+            int dvs = abs(divisor);
+            int dvd = abs(dividend);
+        while(dvd >= dvs){
+            int temp = dvs;
+            int count = 1;
+            while(dvd >= (temp<<1)){
+                temp <<= 1;
+                count <<= 1;
+            }
+            dvd -= temp;
+            quotient += count; 
+        }
+        return sign*quotient;
+    }
+};
